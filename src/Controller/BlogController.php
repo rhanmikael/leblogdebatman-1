@@ -57,4 +57,22 @@ class BlogController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Page qui liste tous les articles
+     *
+     * @Route("/publications/liste/", name="publication_list")
+     */
+    public function publicationList(): Response
+    {
+
+        $articleRepo = $this->getDoctrine()->getRepository(Article::class);
+
+        $articles = $articleRepo->findAll();
+
+        return $this->render('blog/publicationList.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
 }
